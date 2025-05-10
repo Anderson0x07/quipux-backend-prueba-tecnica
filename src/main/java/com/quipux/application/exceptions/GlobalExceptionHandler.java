@@ -132,15 +132,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             BusinessException ex,
             WebRequest request
     ) {
+
+        String message = messageSource.getMessage(
+                ex.getMessage(),
+                ex.getArgs(),
+                LocaleContextHolder.getLocale()
+        );
+
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .timestamp(String.valueOf(LocalDateTime.now()))
-                .status(HttpStatus.UNPROCESSABLE_ENTITY.value())
-                .error(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase())
-                .message(ex.getMessage())
+                .status(HttpStatus.CONFLICT.value())
+                .error(HttpStatus.CONFLICT.getReasonPhrase())
+                .message(message)
                 .path(request.getDescription(false).replace("uri=", ""))
                 .build();
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

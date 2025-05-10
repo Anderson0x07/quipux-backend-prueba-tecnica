@@ -30,8 +30,8 @@ public class PlaylistUsecaseImpl implements PlaylistUsecase {
     }
 
     @Override
-    public Playlist save(Playlist user) {
-        return playlistPort.create(user);
+    public Playlist save(Playlist playlist) {
+        return playlistPort.create(playlist);
     }
 
 }

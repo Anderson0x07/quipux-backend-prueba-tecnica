@@ -50,7 +50,7 @@ public class PlaylistController implements PlaylistApi {
 
     @Override
     @DeleteMapping("/{listName}")
-    public ResponseEntity<?> deletePlaylist(@PathVariable @NotNull String listName) {
+    public ResponseEntity<Void> deletePlaylist(@PathVariable @NotNull String listName) {
         playlistUsecase.delete(listName);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

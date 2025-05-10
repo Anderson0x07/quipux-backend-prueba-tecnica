@@ -18,7 +18,7 @@ public interface PlaylistApi {
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Solicitud exitosa"),})
     ResponseEntity<List<PlaylistResponse>> getPlaylist();
 
-    @Operation(summary = "Obtener Playlist", description = "Responde con un listado de playlist")
+    @Operation(summary = "Obtener Descripcion Playlist", description = "Responde con la descripción de la playlist")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Solicitud exitosa"),})
     ResponseEntity<DescriptionResponse> getPlaylistDescription(String listName);
 
@@ -28,5 +28,5 @@ public interface PlaylistApi {
 
     @Operation(summary = "Eliminar Playlist", description = "Borrar una lista de reproducción.")
     @ApiResponses(value = { @ApiResponse(responseCode = "204", description = "Playlist eliminada"),})
-    ResponseEntity<?> deletePlaylist(String listName);
+    ResponseEntity<Void> deletePlaylist(String listName);
 }
