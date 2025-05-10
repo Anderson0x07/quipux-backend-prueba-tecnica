@@ -34,8 +34,8 @@ public class PlaylistController implements PlaylistApi {
 
     @Override
     @PostMapping
-    public ResponseEntity<PlaylistResponse> createPlaylist(@RequestBody @Valid PlaylistRequest userRequest) {
-        Playlist domain = userRestMapper.requestToDomain(userRequest);
+    public ResponseEntity<PlaylistResponse> createPlaylist(@RequestBody @Valid PlaylistRequest playlistRequest) {
+        Playlist domain = userRestMapper.requestToDomain(playlistRequest);
         return new ResponseEntity<>(userRestMapper.domainToResponse(playlistUsecase.save(domain)), HttpStatus.CREATED);
     }
 

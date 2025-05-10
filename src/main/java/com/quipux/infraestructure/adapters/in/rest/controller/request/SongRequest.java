@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class SongRequest {
+    private Long id;
     @NotNull
     private String titulo;
     @NotNull
