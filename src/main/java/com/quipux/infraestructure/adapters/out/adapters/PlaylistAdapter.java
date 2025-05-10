@@ -1,5 +1,6 @@
 package com.quipux.infraestructure.adapters.out.adapters;
 
+import com.quipux.application.exceptions.BusinessException;
 import com.quipux.application.exceptions.ResourceNotFoundException;
 import com.quipux.domain.Playlist;
 import com.quipux.infraestructure.adapters.out.database.entities.PlaylistEntity;
@@ -34,7 +35,7 @@ public class PlaylistAdapter implements PlaylistPort {
         Optional<PlaylistEntity> playlistRepetida = playlistRepository.findByNombre(playlist.getNombre());
 
         if(playlistRepetida.isPresent()) {
-            throw new ResourceNotFoundException("PLAYLIST.REPEAT", playlist.getNombre());
+            throw new BusinessException("PLAYLIST.REPEAT", playlist.getNombre());
         }
 
         PlaylistEntity playlistEntity = playlistMapper.domainToEntity(playlist);
