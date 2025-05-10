@@ -163,6 +163,9 @@
 						<exclude>**/application/exceptions/**</exclude>
 						<exclude>**/request/**</exclude>
 						<exclude>**/response/**</exclude>
+						<exclude>**/auth/**</exclude>
+						<exclude>**/security/**</exclude>
+						<exclude>**/configuration/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
