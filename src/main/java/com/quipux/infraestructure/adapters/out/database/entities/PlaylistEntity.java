@@ -24,6 +24,11 @@ public class PlaylistEntity {
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    @OneToMany(mappedBy = "playlist", orphanRemoval = true)
+    @ManyToMany
+    @JoinTable(
+        name = "playlist_song",
+        joinColumns = @JoinColumn(name = "playlist_id"),
+        inverseJoinColumns = @JoinColumn(name = "song_id")
+    )
     private List<SongEntity> canciones = new ArrayList<>();
 }

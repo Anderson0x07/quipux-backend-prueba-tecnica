@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "song")
 @Getter
@@ -15,9 +18,8 @@ public class SongEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "playlist_id")
-    private PlaylistEntity playlist;
+    @ManyToMany(mappedBy = "canciones")
+    private List<PlaylistEntity> playlists = new ArrayList<>();
 
     @Column(name = "titulo", nullable = false)
     private String titulo;

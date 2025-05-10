@@ -50,9 +50,10 @@ public class SongAdapter implements SongPort {
             throw new ResourceNotFoundException("PLAYLIST.NOTFOUND", playlistName);
         }
 
-        song.get().setPlaylist(playlist.get());
-
-        songRepository.save(song.get());
+        if (!playlist.get().getCanciones().contains(song)) {
+            playlist.get().getCanciones().add(song.get());
+            playlistRepository.save(playlist.get());
+        }
 
         return "Canción agregada a la playlist exitosamente";
     }

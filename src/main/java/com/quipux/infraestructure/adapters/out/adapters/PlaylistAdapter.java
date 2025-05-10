@@ -39,8 +39,6 @@ public class PlaylistAdapter implements PlaylistPort {
                     if(cancionExistente.isEmpty()) {
                         throw new ResourceNotFoundException("SONG.NOTFOUND", c.getTitulo());
                     }
-
-                    cancionExistente.get().setPlaylist(playlistEntity);
                     return cancionExistente.get();
                 })
                 .collect(Collectors.toList());
@@ -70,6 +68,9 @@ public class PlaylistAdapter implements PlaylistPort {
         if(playlist.isEmpty()) {
             throw new ResourceNotFoundException("PLAYLIST.NOTFOUND", name);
         }
+
+        playlist.get().getCanciones().forEach(song -> song.getPlaylists().remove(playlist.get()));
+        playlist.get().getCanciones().clear();
 
 
         playlistRepository.delete(playlist.get());
