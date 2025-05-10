@@ -49,7 +49,7 @@ public class SongController implements SongApi {
 
     @Override
     @PostMapping
-    public ResponseEntity<SongResponse> createSong(@Valid SongRequest songRequest) {
+    public ResponseEntity<SongResponse> createSong(@Valid @RequestBody SongRequest songRequest) {
         Song domain = songRestMapper.requestToDomain(songRequest);
         return new ResponseEntity<>(songRestMapper.domainToResponse(songUsecase.save(domain)), HttpStatus.CREATED);
     }

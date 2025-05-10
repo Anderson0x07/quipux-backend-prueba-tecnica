@@ -20,16 +20,19 @@ public class SongAdapter implements SongPort {
 
     SongRepository songRepository;
     PlaylistRepository playlistRepository;
-    SongMapper playlistMapper;
+    SongMapper songMapper;
 
     @Override
     public List<Song> findAll() {
-        return playlistMapper.entitiesToDomains(songRepository.findAll());
+
+        List<SongEntity> list = songRepository.findAll();
+        return songMapper.entitiesToDomains(list);
     }
 
     @Override
-    public Song create(Song user) {
-        return playlistMapper.entityToDomain(songRepository.save(playlistMapper.domainToEntity(user)));
+    public Song create(Song song) {
+        SongEntity songEntity = songMapper.domainToEntity(song);
+        return songMapper.entityToDomain(songRepository.save(songEntity));
     }
 
     @Override
