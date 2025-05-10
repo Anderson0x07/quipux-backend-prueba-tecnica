@@ -1,0 +1,1 @@
+INSERT INTO app_user (id, email, password, complete_name) VALUES (9999, 'test@gmail.com', '$2a$12$9i2AJ.GNlhDEIey3lVVsUOndPmEeKE7naTNizSbC7CGMH0bHjIX7q' , 'ADMIN');
