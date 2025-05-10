@@ -24,26 +24,26 @@ import java.util.List;
 public class PlaylistController implements PlaylistApi {
 
     private final PlaylistUsecase playlistUsecase;
-    private final PlaylistRestMapper userRestMapper;
+    private final PlaylistRestMapper playlistRestMapper;
 
     @Override
     @GetMapping
     public ResponseEntity<List<PlaylistResponse>> getPlaylist() {
-        return new ResponseEntity<>(userRestMapper.domainsToResponses(playlistUsecase.getPlaylist()), HttpStatus.OK);
+        return new ResponseEntity<>(playlistRestMapper.domainsToResponses(playlistUsecase.getPlaylist()), HttpStatus.OK);
     }
 
     @Override
     @PostMapping
     public ResponseEntity<PlaylistResponse> createPlaylist(@RequestBody @Valid PlaylistRequest playlistRequest) {
-        Playlist domain = userRestMapper.requestToDomain(playlistRequest);
-        return new ResponseEntity<>(userRestMapper.domainToResponse(playlistUsecase.save(domain)), HttpStatus.CREATED);
+        Playlist domain = playlistRestMapper.requestToDomain(playlistRequest);
+        return new ResponseEntity<>(playlistRestMapper.domainToResponse(playlistUsecase.save(domain)), HttpStatus.CREATED);
     }
 
     @Override
     @GetMapping("/{listName}")
     public ResponseEntity<DescriptionResponse> getPlaylistDescription(@PathVariable @NotNull String listName) {
         Playlist domain = playlistUsecase.getPlaylistByName(listName);
-        return new ResponseEntity<>(userRestMapper.domainToResponseDescription(domain), HttpStatus.OK);
+        return new ResponseEntity<>(playlistRestMapper.domainToResponseDescription(domain), HttpStatus.OK);
 
     }
 

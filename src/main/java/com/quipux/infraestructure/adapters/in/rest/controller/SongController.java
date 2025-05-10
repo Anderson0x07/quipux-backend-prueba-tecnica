@@ -1,6 +1,5 @@
 package com.quipux.infraestructure.adapters.in.rest.controller;
 
-import com.quipux.domain.Playlist;
 import com.quipux.domain.Song;
 import com.quipux.infraestructure.adapters.in.rest.configuration.SongApi;
 import com.quipux.infraestructure.adapters.in.rest.controller.request.SongRequest;
