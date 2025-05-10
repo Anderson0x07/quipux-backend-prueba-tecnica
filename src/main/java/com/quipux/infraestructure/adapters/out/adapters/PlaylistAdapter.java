@@ -30,6 +30,13 @@ public class PlaylistAdapter implements PlaylistPort {
 
     @Override
     public Playlist create(Playlist playlist) {
+
+        Optional<PlaylistEntity> playlistRepetida = playlistRepository.findByNombre(playlist.getNombre());
+
+        if(playlistRepetida.isPresent()) {
+            throw new ResourceNotFoundException("PLAYLIST.REPEAT", playlist.getNombre());
+        }
+
         PlaylistEntity playlistEntity = playlistMapper.domainToEntity(playlist);
 
         List<SongEntity> canciones = playlist.getCanciones().stream()
@@ -56,11 +63,13 @@ public class PlaylistAdapter implements PlaylistPort {
     @Override
     public Playlist findByName(String name) {
 
-        PlaylistEntity playlist = playlistRepository.findByNombre(name).orElseThrow(
-                () -> new ResourceNotFoundException("PLAYLIST.NOTFOUND", name)
-        );
+        Optional<PlaylistEntity> playlist = playlistRepository.findByNombre(name);
 
-        return playlistMapper.entityToDomain(playlist);
+        if(playlist.isEmpty()) {
+            throw new ResourceNotFoundException("PLAYLIST.NOTFOUND", name);
+        }
+
+        return playlistMapper.entityToDomain(playlist.get());
     }
 
     @Override
